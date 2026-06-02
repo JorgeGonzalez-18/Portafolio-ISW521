@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería Multimedia - Tema 6</title>
+</head>
+<body>
+
+  <h1>Galería de Recursos Multimedia</h1>
+  <p>Curso en línea — Tema 6: Multimedia</p>
+
+  <!-- 1. Imagen principal con <picture> y 2 fuentes -->
+  <section>
+    <h2>Imagen Principal</h2>
+    <picture>
+      <source srcset="imagen-grande.webp" media="(min-width: 800px)">
+      <source srcset="imagen-pequena.jpg" media="(max-width: 799px)">
+      <img src="1111.webp" alt="Portada del curso en línea de multimedia">
+    </picture>
+  </section>
+
+  <!-- 2. Video con controles, poster y 2 formatos -->
+  <section>
+    <h2>Video de la Clase</h2>
+    <video controls poster="poster-video.jpg" title="Clase introductoria de multimedia">
+      <source src="video-clase.mp4" type="video/mp4">
+      <source src="video-clase.webm" type="video/webm">
+      Tu navegador no soporta el elemento video.
+    </video>
+  </section>
+
+  <!-- 3. Audio podcast con controls y loop desactivado -->
+  <section>
+    <h2>Podcast del Curso</h2>
+    <audio controls title="Podcast — Episodio 1: Introducción a multimedia">
+      <source src="podcast.mp3" type="audio/mpeg">
+      <source src="podcast.ogg" type="audio/ogg">
+      Tu navegador no soporta el elemento audio.
+    </audio>
+  </section>
+
+  <!-- 4. iframe de Google Maps con sandbox correcto -->
+  <section>
+    <h2>Ubicación</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18..."
+      width="600"
+      height="450"
+      title="Mapa de ubicación del campus"
+      sandbox="allow-scripts allow-same-origin"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+
+</body>
+</html>
