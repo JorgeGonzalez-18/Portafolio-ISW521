@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcueductosIoT — Panel de Control Técnico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar" aria-label="Navegación principal del sistema">
+            <div class="nav-logo">
+                <span>💧 AcueductosIoT</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active" aria-current="page">Inicio</a></li>
+                <li><a href="#">Sensores</a></li>
+                <li><a href="#">Alertas</a></li>
+                <li><a href="#">Reportes</a></li>
+            </ul>
+            <button class="btn-logout" type="button">Cerrar Sesión</button>
+        </nav>
+    </header>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar" aria-label="Menú de operaciones">
+            <span class="sidebar-title">Menú</span>
+            <nav aria-label="Navegación secundaria">
+                <ul>
+                    <li class="active" tabindex="0">📊 Resumen</li>
+                    <li tabindex="0">💧 Tanques</li>
+                    <li tabindex="0">⚡ Presiones</li>
+                    <li tabindex="0">🧪 Calidad</li>
+                    <li tabindex="0">⚙️ Configuración</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Monitoreo en <span class="highlight">Tiempo Real</span></h2>
+                <span class="live-indicator" aria-live="polite">● En vivo</span>
+            </header>
+            <section class="news-banner" aria-label="Información y avisos importantes">
+                <div class="news-icon" aria-hidden="true">📢</div>
+                <div class="news-content">
+                    <span class="news-tag">AVISO IMPORTANTE</span>
+                    <p class="news-text">
+                        Mantenimiento programado en las válvulas de presión del **Sector B** este próximo miércoles de
+                        08:00 a 12:00.
+                        Se prevén fluctuaciones temporales en las lecturas de telemetría.
+                    </p>
+                </div>
+            </section>
+            <section class="sensor-grid" aria-label="Lecturas de telemetría actual">
+
+                <div class="sensor-card ok">
+                    <h3>💧 Nivel de Tanque Principal</h3>
+                    <p class="sensor-value">73%</p>
+                    <p class="sensor-label">Sector A — Actualizado hace 2 min</p>
+                </div>
+
+                <div class="sensor-card alert">
+                    <h3>🌡️ Temperatura del Agua</h3>
+                    <p class="sensor-value">22°C</p>
+                    <p class="sensor-label">Sector B — Actualizado hace 5 min</p>
+                </div>
+
+                <div class="sensor-card ok">
+                    <h3>⚡ Flujo de Agua</h3>
+                    <p class="sensor-value">120 L/min</p>
+                    <p class="sensor-label">Sector C — Actualizado hace 1 min</p>
+                </div>
+
+                <div class="sensor-card warning">
+                    <h3>📊 Presión del Sistema</h3>
+                    <p class="sensor-value">45 psi</p>
+                    <p class="sensor-label">Sector D — Actualizado hace 3 min</p>
+                </div>
+
+                <div class="sensor-card ok">
+                    <h3>💧 Nivel de Tanque Secundario</h3>
+                    <p class="sensor-value">65%</p>
+                    <p class="sensor-label">Sector E — Actualizado hace 4 min</p>
+                </div>
+
+                <div class="sensor-card neutral">
+                    <h3>⚠️ Alerta de Fuga</h3>
+                    <p class="sensor-value">No detectada</p>
+                    <p class="sensor-label">Sector F — Último chequeo hace 10 min</p>
+                </div>
+
+            </section>
+
+            <section class="chart-section" aria-label="Análisis histórico">
+                <h3>Presión de Red — Últimas 6 horas</h3>
+                <div class="mock-chart" role="img"
+                    aria-label="Gráfico lineal que muestra estabilidad de presión con un leve descenso al final a 28 psi">
+                    <p>[ Aquí irían los gráficos dinámicos del IoT ]</p>
+                    <span class="chart-value">28 PSI</span>
+                </div>
+            </section>
+            <section class="report-section" aria-labelledby="report-title">
+    <h3 id="report-title">🛠️ Reportar Avería o Afectación del Sistema</h3>
+    <p class="report-subtitle">Utilice este formulario para registrar incidencias críticas en la infraestructura hídrica.</p>
+    
+    <form class="report-form" action="#" method="POST">
+        <div class="form-group">
+            <label for="componente-afectado">Componente o Sector Afectado:</label>
+            <select id="componente-afectado" name="componente" required>
+                <option value="" disabled selected>Seleccione el sector...</option>
+                <option value="sector-a">Tanque Principal — Sector A</option>
+                <option value="sector-b">Tubería de Distribución — Sector B</option>
+                <option value="sector-c">Bomba de Impulsión — Estación 1</option>
+                <option value="sector-d">Red de Distribución — Sector D</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo-averia">Tipo de Afectación:</label>
+            <select id="tipo-averia" name="tipo_averia" required>
+                <option value="" disabled selected>Seleccione el tipo de falla...</option>
+                <option value="fuga">Fuga / Ruptura de Tubería</option>
+                <option value="presion">Baja Presión Crítica</option>
+                <option value="calidad">Alteración en la Calidad del Agua (Turbidez/Cloro)</option>
+                <option value="electrico">Fallo Eléctrico / Mecánico de Bomba</option>
+            </select>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="descripcion-averia">Descripción Detallada del Incidente:</label>
+            <textarea id="descripcion-averia" name="descripcion" rows="4" placeholder="Describa los síntomas observados o lecturas anómalas..." required></textarea>
+        </div>
+
+        <div class="form-actions full-width">
+            <button type="submit" class="btn-submit">Enviar Reporte Técnico</button>
+        </div>
+    </form>
+</section>
+        </main>
+
+        <aside class="alert-panel" aria-label="Alertas del sistema en tiempo real">
+            <h3>🔔 Alertas Activas</h3>
+
+            <div class="alert danger" role="alert">
+                <strong>⚠️ Presión baja — Sector B</strong>
+                <span class="alert-meta">Hace 3 minutos</span>
+            </div>
+
+            <div class="alert success" role="alert">
+                <strong>✅ Cloro en rango normal</strong>
+                <span class="alert-meta">Hace 15 minutos</span>
+            </div>
+        </aside>
+
+    </div>
+
+</body>
+
+</html>

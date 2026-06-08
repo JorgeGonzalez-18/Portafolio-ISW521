@@ -1,0 +1,524 @@
+/* ==========================================================================
+   Hoja de Estilos Dashboard — AcueductosIoT
+   ========================================================================== */
+
+/* --- Variables Globales (Diseño Oscuro de la Referencia) --- */
+:root {
+    --bg-main: #0b1425;
+    /* Fondo cian-oscuro profundo */
+    --bg-navbar: #0f2133;
+    /* Fondo barra superior */
+    --bg-cards: #132a42;
+    /* Contenedores de módulos */
+    --bg-sidebar: #091a2b;
+    /* Menú e información lateral */
+    --text-primary: #ffffff;
+    --text-muted: #849bbb;
+    --accent-blue: #00ffcc;
+    /* Color de iluminación de la interfaz */
+    --color-ok: #10b981;
+    --color-warn: #f59e0b;
+    --color-danger: #f43f5e;
+}
+
+/* --- Resets e Inclusividad --- */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================
+   EJERCICIO 1: BARRA DE NAVEGACIÓN SUPERIOR
+   ========================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    /* Distribución del espacio entre los elementos */
+    align-items: center;
+    min-height: 60px;
+    background-color: var(--bg-navbar);
+    padding: 0 32px;
+    border-bottom: 2px solid #163654;
+}
+
+.nav-logo {
+    font-weight: bold;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    /* Los <li> también se configuran como flex items */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-blue);
+    border-bottom: 2px solid var(--accent-blue);
+    padding-top: 2px;
+}
+
+.btn-logout {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid #1e3a5f;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: var(--color-danger);
+    color: white;
+    border-color: var(--color-danger);
+}
+
+/* ==========================================
+   EJERCICIO 3: DISTRIBUCIÓN DEL DASHBOARD
+   ========================================== */
+.dashboard-layout {
+    display: flex;
+    flex-direction: row;
+    /* Layout horizontal base */
+    min-height: calc(100vh - 60px);
+    /* Descuenta la altura del navbar */
+    box-sizing: border-box;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 180px;
+    /* Evita que el panel se colapse excesivamente */
+    background-color: var(--bg-sidebar);
+    padding: 24px;
+    border-right: 1px solid #163654;
+}
+
+/* NOTAS RESPUESTAS CUESTIONARIO:
+   Diferencia entre flex: 1 y flex-grow: 1 -> flex-grow: 1 es una propiedad individual 
+   que expande el ítem basándose en su contenido inicial. flex: 1 resetea flex-basis a 0, 
+   garantizando un reparto proporcional idéntico e inmune al volumen de texto interior. */
+
+.sidebar-title {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar li {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+    background-color: #112d4e;
+    color: var(--accent-blue);
+    outline: none;
+}
+
+.sidebar li:focus-visible {
+    outline: 2px solid var(--accent-blue);
+}
+
+.main-content {
+    flex: 3;
+    /* Proporción dominante central */
+    padding: 24px;
+    background-color: var(--bg-main);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.content-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.content-header .highlight {
+    color: var(--accent-blue);
+}
+
+.live-indicator {
+    background-color: #064e3b;
+    color: var(--color-ok);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* ==========================================
+   Sección de Avisos Importantes (Mini Noticias)
+   ========================================== */
+.news-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #112d4e;
+    /* Azul intermedio para contrastar con el fondo profundo */
+    border: 1px solid #1e3a5f;
+    border-left: 4px solid #00ffcc;
+    /* Línea brillante para capturar la atención visual */
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    /* Separa el aviso de la cuadrícula de sensores */
+    box-sizing: border-box;
+}
+
+.news-icon {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.news-tag {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #00ffcc;
+    letter-spacing: 0.05em;
+}
+
+.news-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+/* Adaptación inclusiva para dispositivos móviles */
+@media (max-width: 576px) {
+    .news-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* ==========================================
+   EJERCICIO 2: CUADRÍCULA DE TELEMETRÍA
+   ========================================== */
+.sensor-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    /* Evita el uso de margin: 8px (PROHIBIDO) */
+    padding: 0 0 24px 0;
+}
+
+.sensor-card {
+    /* Base calculada para tres columnas simétricas */
+    flex-basis: calc(33.333% - 11px);
+    background-color: var(--bg-cards);
+    border: 1px solid #163654;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.sensor-card h3 {
+    margin: 0 0 12px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sensor-card .sensor-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0 0 6px 0;
+}
+
+/* Modificadores de color según el estado del sensor */
+.sensor-card.ok .sensor-value {
+    color: var(--color-ok);
+}
+
+.sensor-card.warning .sensor-value {
+    color: var(--color-warn);
+}
+
+.sensor-card.alert .sensor-value {
+    color: var(--color-danger);
+}
+
+.sensor-card.neutral .sensor-value {
+    color: var(--text-primary);
+}
+
+.sensor-card .sensor-label {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Estilo para los gráficos simulados */
+.chart-section h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.mock-chart {
+    background-color: var(--bg-cards);
+    border: 1px solid #163654;
+    border-radius: 8px;
+    min-height: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-muted);
+}
+
+.chart-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-blue);
+}
+
+/* ==========================================
+   PANEL DE ALERTAS DERECHO
+   ========================================== */
+.alert-panel {
+    flex: 1;
+    padding: 24px;
+    background-color: var(--bg-sidebar);
+    border-left: 1px solid #163654;
+}
+
+.alert-panel h3 {
+    margin-top: 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    background-color: var(--bg-main);
+    border-left: 4px solid var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.alert.danger {
+    border-left-color: var(--color-danger);
+    color: #fda4af;
+}
+
+.alert.success {
+    border-left-color: var(--color-ok);
+    color: #a7f3d0;
+}
+
+.alert-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   EJERCICIO 4: MEDIA QUERY (DISEÑO RESPONSIVO)
+   ========================================== */
+@media (max-width: 992px) {
+    .sensor-card {
+        flex-basis: calc(50% - 8px);
+        /* Escala a dos columnas en pantallas intermedias */
+    }
+}
+
+/* ==========================================
+   Módulo de Reporte de Averías
+   ========================================== */
+.report-section {
+    background-color: var(--bg-cards);
+    border: 1px solid #163654;
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.report-section h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.report-subtitle {
+    margin: 0 0 20px 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Formulario en Grid/Flex para alineación limpia */
+.report-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Por defecto en escritorio toma aproximadamente la mitad de la fila */
+    flex: 1 1 calc(50% - 8px);
+    min-width: 250px;
+}
+
+/* Clases utilitarias para elementos que toman todo el ancho */
+.form-group.full-width {
+    flex: 1 1 100%;
+}
+
+.form-actions.full-width {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* Alinea el botón a la derecha */
+}
+
+/* Estilos de etiquetas */
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Control de inputs, selectores y campos de texto */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid #163654;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+/* Indicadores de enfoque accesibles para navegación por teclado */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.15);
+}
+
+/* Botón de envío */
+.btn-submit {
+    background-color: #1e3a5f;
+    color: var(--accent-blue);
+    border: 1px solid var(--accent-blue);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+}
+
+@media (max-width: 768px) {
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dashboard-layout {
+        flex-direction: column;
+        /* Cambio clave a flujo vertical */
+    }
+
+    .sidebar,
+    .alert-panel {
+        flex: none;
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid #163654;
+    }
+
+    .sensor-card {
+        flex-basis: 100%;
+        /* Una sola columna en dispositivos móviles */
+    }
+
+    .main-content {
+        flex: 1;
+    }
+}
