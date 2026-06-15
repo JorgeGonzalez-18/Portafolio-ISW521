@@ -10,11 +10,21 @@
 
 <body>
 
-    <header>
+    <header class="page-header">
         <nav class="navbar" aria-label="Navegación principal del sistema">
             <div class="nav-logo">
                 <span>💧 AcueductosIoT</span>
             </div>
+            <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true" focusable="false" role="img">
+                    <title>Menú</title>
+                    <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line class="line line1" x1="2" y1="3" x2="26" y2="3"></line>
+                        <line class="line line2" x1="2" y1="10" x2="26" y2="10"></line>
+                        <line class="line line3" x1="2" y1="17" x2="26" y2="17"></line>
+                    </g>
+                </svg>
+            </button>
             <ul class="nav-links">
                 <li><a href="#" class="active" aria-current="page">Inicio</a></li>
                 <li><a href="#">Sensores</a></li>
@@ -24,6 +34,8 @@
             <button class="btn-logout" type="button">Cerrar Sesión</button>
         </nav>
     </header>
+
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
 
     <div class="dashboard-layout">
 
@@ -49,11 +61,10 @@
                 <div class="news-icon" aria-hidden="true">📢</div>
                 <div class="news-content">
                     <span class="news-tag">AVISO IMPORTANTE</span>
-                    <p class="news-text">
-                        Mantenimiento programado en las válvulas de presión del **Sector B** este próximo miércoles de
-                        08:00 a 12:00.
-                        Se prevén fluctuaciones temporales en las lecturas de telemetría.
-                    </p>
+                        <p class="news-text">
+                            Actualización programada del sistema. Durante el período indicado podría haber interrupciones
+                            temporales en las lecturas y servicios asociados. Por favor, tome las precauciones necesarias.
+                        </p>
                 </div>
             </section>
             <section class="sensor-grid" aria-label="Lecturas de telemetría actual">
@@ -64,7 +75,7 @@
                     <p class="sensor-label">Sector A — Actualizado hace 2 min</p>
                 </div>
 
-                <div class="sensor-card alert">
+                <div class="sensor-card warning">
                     <h3>🌡️ Temperatura del Agua</h3>
                     <p class="sensor-value">22°C</p>
                     <p class="sensor-label">Sector B — Actualizado hace 5 min</p>
@@ -99,9 +110,19 @@
             <section class="chart-section" aria-label="Análisis histórico">
                 <h3>Presión de Red — Últimas 6 horas</h3>
                 <div class="mock-chart" role="img"
-                    aria-label="Gráfico lineal que muestra estabilidad de presión con un leve descenso al final a 28 psi">
-                    <p>[ Aquí irían los gráficos dinámicos del IoT ]</p>
-                    <span class="chart-value">28 PSI</span>
+                    aria-label="Gráfico de barras que muestra la presión de la red con tendencia estable y una ligera caída final">
+                    <div class="chart-bars" aria-hidden="true">
+                        <span class="chart-bar" style="--bar-height: 72%;" data-value="26 psi"></span>
+                        <span class="chart-bar" style="--bar-height: 78%;" data-value="27 psi"></span>
+                        <span class="chart-bar" style="--bar-height: 84%;" data-value="30 psi"></span>
+                        <span class="chart-bar" style="--bar-height: 80%;" data-value="29 psi"></span>
+                        <span class="chart-bar" style="--bar-height: 76%;" data-value="28 psi"></span>
+                        <span class="chart-bar" style="--bar-height: 70%;" data-value="27 psi"></span>
+                    </div>
+                    <div class="chart-info">
+                        <span class="chart-label">Últimas 6 horas</span>
+                        <span class="chart-value">28 PSI</span>
+                    </div>
                 </div>
             </section>
             <section class="report-section" aria-labelledby="report-title">
@@ -158,7 +179,38 @@
         </aside>
 
     </div>
+</div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.querySelector('.hamburger');
+            const sidebar = document.querySelector('.sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+
+            function setAria(open) {
+                if (btn) btn.setAttribute('aria-expanded', open);
+            }
+
+            if (btn && sidebar) {
+                btn.addEventListener('click', function () {
+                    const isOpen = sidebar.classList.toggle('open');
+                    btn.classList.toggle('open', isOpen);
+                    if (backdrop) { backdrop.classList.toggle('active', isOpen); backdrop.hidden = !isOpen; }
+                    setAria(isOpen);
+                });
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener('click', function () {
+                    sidebar.classList.remove('open');
+                    btn.classList.remove('open');
+                    backdrop.classList.remove('active');
+                    backdrop.hidden = true;
+                    setAria(false);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
