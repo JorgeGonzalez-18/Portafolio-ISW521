@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Congreso Universitario</title>
+    <style>
+        body { font-family: Arial; margin: 0; padding: 0; background: #f0f0f0; }
+        .header { background: #003366; color: white; padding: 20px; text-align: center; }
+        .nav { background: #0055a5; padding: 10px; }
+        .nav a { color: white; margin: 0 10px; text-decoration: none; }
+        .main { padding: 20px; }
+        .footer { background: #003366; color: white; padding: 15px; text-align: center; }
+        .card { background: white; border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        td, th { border: 1px solid #ccc; padding: 8px; }
+        th { background: #0055a5; color: white; }
+        input, select, textarea { width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box; }
+        .btn { background: #0055a5; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- ERROR #1: Se usa <div> para TODO. No hay header, main, nav,  -->
+    <!-- footer, section, article, ni ninguna etiqueta semántica.     -->
+    <!-- Esto es lo que se llama "Div-Soup".                          -->
+    <!-- ============================================================ -->
+
+    <div class="header">
+        <div>
+            <div>
+                <h1>Congreso Universitario de Tecnología y Sostenibilidad</h1>
+                <div>UTN Sede San Carlos · 15, 16 y 17 de Agosto 2025</div>
+                <div>Innovar para un futuro verde y digital</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#ponentes">Ponentes</a>
+        <a href="#horario">Horario</a>
+        <a href="#registro">Registro</a>
+        <a href="#ubicacion">Ubicación</a>
+    </div>
+
+    <div class="main">
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: SOBRE EL CONGRESO                                   -->
+        <!-- ERROR #1 continua: <div class="card"> en lugar de <article>  -->
+        <!-- o <section> con significado semántico real.                   -->
+        <!-- ============================================================ -->
+
+        <div id="inicio" class="card">
+            <h2>Sobre el Congreso</h2>
+            <div>
+                <p>
+                    El Congreso Universitario de Tecnología y Sostenibilidad es el evento académico
+                    más importante del año en la Sede San Carlos. Reunirá a investigadores, docentes,
+                    estudiantes y profesionales del sector tecnológico para discutir los desafíos
+                    del desarrollo sostenible en la era digital.
+                </p>
+                <p>
+                    Este año el congreso se enfoca en tres ejes temáticos: Inteligencia Artificial Ética,
+                    Energías Renovables y Software para el Bien Común.
+                </p>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: VIDEO PROMOCIONAL                                    -->
+        <!-- ERROR #4: El video NO tiene atributo "poster", NO tiene      -->
+        <!-- controles visibles (controls), y solo tiene UN source.       -->
+        <!-- Además falta el texto alternativo de respaldo.               -->
+        <!-- ============================================================ -->
+
+        <div class="card">
+            <h2>Video Promocional</h2>
+            <div>
+                <div class="mediaplugin mediaplugin_videojs d-block"><div style="max-width:100px;"><video  data-setup-lazy="{&quot;language&quot;: &quot;es&quot;, &quot;fluid&quot;: true, &quot;playbackRates&quot;: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2], &quot;userActions&quot;: {&quot;hotkeys&quot;: true}}" id="id_videojs_6a1db4e568889_1" class="video-js" title="promo_congreso.mp4"><source src="video/promo_congreso.mp4" type="video/mp4" />
+                    
+                </video></div></div>
+                <div>Si no puedes ver el video, actualiza tu navegador.</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: PONENTES DESTACADOS                                  -->
+        <!-- ERROR #1 continua: Uso de <div> donde debería haber          -->
+        <!-- <article> para cada ponente y <section> para el grupo.       -->
+        <!-- ============================================================ -->
+
+        <div id="ponentes" class="card">
+            <h2>Ponentes Destacados</h2>
+            <div>
+
+                <div class="card">
+                    <div><strong>Dra. Laura Rodríguez</strong></div>
+                    <div>Especialista en Inteligencia Artificial Ética - UCR</div>
+                    <div>
+                        Ponencia: "Sesgos algorítmicos en sistemas de contratación: el caso latinoamericano"
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div><strong>Ing. Carlos Mendoza</strong></div>
+                    <div>Director de Innovación - Instituto Costarricense de Electricidad</div>
+                    <div>
+                        Ponencia: "Microrredes eléctricas rurales con energía solar: experiencias en zonas alejadas"
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div><strong>MSc. Patricia Vega</strong></div>
+                    <div>Investigadora en Software Libre - TEC</div>
+                    <div>
+                        Ponencia: "Código abierto como herramienta para la democratización del conocimiento"
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: TABLA DE HORARIO                                     -->
+        <!-- ERROR #3: La tabla NO usa <thead>, <tbody> ni <tfoot>.       -->
+        <!-- Los <th> NO tienen el atributo "scope".                       -->
+        <!-- No hay <caption> descriptivo para la tabla.                  -->
+        <!-- Esto rompe la accesibilidad para lectores de pantalla.        -->
+        <!-- ============================================================ -->
+
+        <div id="horario" class="card">
+            <h2>Horario del Congreso</h2>
+            <div>
+                <table>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Lunes 15 Ago</th>
+                        <th>Martes 16 Ago</th>
+                        <th>Miércoles 17 Ago</th>
+                    </tr>
+                    <tr>
+                        <td>8:00 - 9:00</td>
+                        <td>Acreditación y Bienvenida</td>
+                        <td>Apertura del día</td>
+                        <td>Apertura del día</td>
+                    </tr>
+                    <tr>
+                        <td>9:00 - 10:30</td>
+                        <td>Conferencia Magistral: Dra. Rodríguez</td>
+                        <td>Taller de Machine Learning</td>
+                        <td>Panel: Futuro Verde</td>
+                    </tr>
+                    <tr>
+                        <td>10:30 - 11:00</td>
+                        <td>Coffee Break</td>
+                        <td>Coffee Break</td>
+                        <td>Coffee Break</td>
+                    </tr>
+                    <tr>
+                        <td>11:00 - 12:30</td>
+                        <td>Mesa Redonda: IA y Sociedad</td>
+                        <td>Presentaciones de investigación</td>
+                        <td>Conferencia: Ing. Mendoza</td>
+                    </tr>
+                    <tr>
+                        <td>12:30 - 14:00</td>
+                        <td>Almuerzo</td>
+                        <td>Almuerzo</td>
+                        <td>Almuerzo y clausura</td>
+                    </tr>
+                    <tr>
+                        <td>14:00 - 15:30</td>
+                        <td>Taller: Energías Renovables</td>
+                        <td>Conferencia: MSc. Vega</td>
+                        <td>Ceremonia de clausura</td>
+                    </tr>
+                    <tr>
+                        <td>15:30 - 17:00</td>
+                        <td>Exposición de Proyectos</td>
+                        <td>Networking y actividades</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total horas</strong></td>
+                        <td><strong>8 horas</strong></td>
+                        <td><strong>8 horas</strong></td>
+                        <td><strong>6 horas</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: FORMULARIO DE REGISTRO                              -->
+        <!-- ERROR #2: El formulario NO usa <fieldset> ni <legend>        -->
+        <!-- para agrupar los campos. Usa <select> con opciones fijas      -->
+        <!-- en lugar de <datalist> + <input> para la carrera.            -->
+        <!-- Los labels no están correctamente asociados (falta for/id).  -->
+        <!-- ============================================================ -->
+
+        <div id="registro" class="card">
+            <h2>Formulario de Registro</h2>
+            <div>
+                <form action="#" method="post">
+
+                    <div>Nombre completo:</div>
+                    <input type="text" placeholder="Ingrese su nombre completo">
+
+                    <div>Número de cédula:</div>
+                    <input type="text" placeholder="X-XXXX-XXXX">
+
+                    <div>Correo electrónico institucional:</div>
+                    <input type="text" placeholder="usuario@utn.ac.cr">
+
+                    <div>Número de teléfono:</div>
+                    <input type="text" placeholder="XXXX-XXXX">
+
+                    <div>Tipo de participante:</div>
+                    <select>
+                        <option>Seleccione una opción</option>
+                        <option>Estudiante de grado</option>
+                        <option>Estudiante de posgrado</option>
+                        <option>Docente universitario</option>
+                        <option>Profesional externo</option>
+                        <option>Investigador</option>
+                    </select>
+
+                    <!-- ERROR #2b: Usa <select> con lista fija en lugar de -->
+                    <!-- <datalist> que permite búsqueda dinámica y es el    -->
+                    <!-- control semántico correcto para este caso.          -->
+                    <div>Carrera o Departamento:</div>
+                    <select>
+                        <option>Seleccione su carrera</option>
+                        <option>Ingeniería en Sistemas</option>
+                        <option>Ingeniería en Electrónica</option>
+                        <option>Administración de Empresas</option>
+                        <option>Contaduría Pública</option>
+                        <option>Ingeniería en Construcción</option>
+                        <option>Seguridad e Higiene Laboral</option>
+                        <option>Trabajo Social</option>
+                        <option>Educación</option>
+                        <option>Otra</option>
+                    </select>
+
+                    <div>¿Cuáles talleres le interesan?</div>
+                    <input type="text" placeholder="Ej: Machine Learning, Energías Renovables...">
+
+                    <div>Necesidades especiales o requerimientos de accesibilidad:</div>
+                    <textarea rows="3" placeholder="Indique si tiene alguna necesidad especial..."></textarea>
+
+                    <div>Modalidad de asistencia:</div>
+                    <select>
+                        <option>Presencial</option>
+                        <option>Virtual</option>
+                        <option>Híbrida</option>
+                    </select>
+
+                    <div>
+                        <input type="checkbox"> Acepto los términos y condiciones del congreso
+                    </div>
+                    <div>
+                        <input type="checkbox"> Autorizo el uso de mis datos para fines académicos
+                    </div>
+
+                    <br>
+                    <button class="btn" type="submit">Enviar Registro</button>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECCIÓN: UBICACIÓN / MAPA                                    -->
+        <!-- ERROR #5: El iframe NO tiene loading="lazy" (carga           -->
+        <!-- inmediata aunque el usuario no lo vea).                      -->
+        <!-- NO tiene atributo sandbox (riesgo de seguridad).             -->
+        <!-- NO tiene título descriptivo para accesibilidad.              -->
+        <!-- ============================================================ -->
+
+        <div id="ubicacion" class="card">
+            <h2>Ubicación</h2>
+            <div>
+                <div>UTN Sede San Carlos, Ciudad Quesada, Alajuela, Costa Rica</div>
+                <div>Carretera Florencia - Ciudad Quesada, frente al Banco Nacional</div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.1234567890!2d-84.4234567!3d10.3234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDE5JzI0LjQiTiA4NMKwMjUnMjQuNCJX!5e0!3m2!1ses!2scr!4v1234567890"
+                    width="100%"
+                    height="400"
+                    style="border:0;"
+                    allowfullscreen="">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ERROR #6: ANIDAMIENTO INCORRECTO                             -->
+        <!-- Se coloca un elemento de BLOQUE (<div> con <h3> dentro)      -->
+        <!-- dentro de un elemento de LÍNEA (<span> y luego dentro de     -->
+        <!-- un <a>). Esto viola las reglas del modelo de contenido HTML5  -->
+        <!-- y causa comportamiento de renderizado indefinido.            -->
+        <!-- ============================================================ -->
+
+        <div class="card">
+            <h2>Información Importante</h2>
+            <div>
+                <p>Para más información sobre el congreso, contacte a la comisión organizadora:</p>
+
+                <!-- ERROR #6a: <div> (bloque) dentro de <span> (línea) -->
+                <span>
+                    <div>
+                        <h3>Contacto Principal</h3>
+                        <div>congreso.tecnologia@utn.ac.cr</div>
+                        <div>Teléfono: 2401-3000 ext. 5200</div>
+                    </div>
+                </span>
+
+                <p>También puede visitar nuestra página de redes sociales:</p>
+
+                <!-- ERROR #6b: <div> (bloque) dentro de <a> (línea) -->
+                <a href="https://www.utn.ac.cr">
+                    <div>
+                        <div>Visitar sitio oficial de la UTN</div>
+                        <div>www.utn.ac.cr · Sede San Carlos</div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+    </div><!-- Cierre de .main -->
+
+    <!-- ============================================================ -->
+    <!-- ERROR #1 continua: Se usa <div class="footer"> en lugar de   -->
+    <!-- la etiqueta semántica <footer>                               -->
+    <!-- ============================================================ -->
+
+    <div class="footer">
+        <div>
+            <div>© 2025 UTN Sede San Carlos. Todos los derechos reservados.</div>
+            <div>Congreso Universitario de Tecnología y Sostenibilidad</div>
+            <div>Desarrollado por el Departamento de Tecnología de Información</div>
+        </div>
+    </div>
+
+</body>
+</html>
