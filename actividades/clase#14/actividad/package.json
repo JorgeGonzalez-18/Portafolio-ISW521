@@ -1,0 +1,7 @@
+{
+  "name": "actividad-clase14",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve ."
+  }
+}
