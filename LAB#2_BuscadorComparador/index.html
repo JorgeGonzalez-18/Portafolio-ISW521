@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>LAB#2</title>
+</head>
+
+<body>
+    <header>
+        <h1>Comparador de equipos Mundial 2026
+        </h1>
+    </header>
+    <dialog id="modalReautenticacion">
+        <h3>Reautenticación</h3>
+        <p>Debido a inactividad, debes reautenticarte para continuar</p>
+        <input type="email" id="emailReatenticacion" placeholder="Email">
+        <input type="password" id="contrasenaReatenticacion" placeholder="Contrasena">
+        <button id="confirmarReautenticacion">Confirmar</button>
+        <button id="cancelarReautenticacion">Cancelar</button>
+    </dialog>
+    <main>
+        <input type="text" id="inputBusquedaEquipos" placeholder="Buscar Equipo">
+        <div id="dropdownEquipos"></div>
+        <section id="comparadorSection">
+            <h2>Equipos a comparar</h2>
+            <h3>Primer equipo</h3>
+            <article id="primerEquipo"></article>
+            <h3>Segundo equipo</h3>
+            <article id="segundoEquipo"></article>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
