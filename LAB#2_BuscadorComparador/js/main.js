@@ -9,10 +9,9 @@ input.addEventListener("input", function () {
   clearTimeout(temporizador);
   temporizador = setTimeout(function () {
     buscarEquipos(input.value);
-  }, 400);  // ms de pausa: elegí un número entre 300 y 500
+  }, 400);
 });
 async function buscarEquipos(texto) {
-  // 1. Cancelar la búsqueda anterior si sigue en vuelo
   if (texto.trim() === "") {
     document.querySelector("#dropdownEquipos").innerHTML = "";
     return;
@@ -20,10 +19,7 @@ async function buscarEquipos(texto) {
   if (controladorActual !== null) {
     controladorActual.abort();
   }
-
-  // 2. Crear un controlador nuevo para ESTA búsqueda
-  controladorActual = new AbortController();  // el objeto que da señal + cancelación
-
+  controladorActual = new AbortController();
   try {
     const respuesta = await fetch("https://worldcup26.ir/get/teams", {
       headers: { "Authorization": "Bearer " + token },
@@ -32,8 +28,6 @@ async function buscarEquipos(texto) {
 
     const datos = await respuesta.json();
     const equipos = datos.teams;
-
-    // 3. Filtrar localmente por el texto escrito (los 48 vienen completos)
     const filtrados = equipos.filter(function (equipo) {
       return equipo.name_en.toLowerCase().includes(texto.toLowerCase());
     });
@@ -70,13 +64,23 @@ function mostrarSugerencias(equipos) {
 function seleccionarEquipo(equipo) {
   if (equipoA === null) {
     equipoA = equipo;
+    document.querySelector("#primerEquipo").innerHTML = "";
+    document.querySelector("#primerEquipo").appendChild(crearTarjeta(equipo));
   } else if (equipoB === null) {
+
+    document.querySelector("#segundoEquipo").innerHTML = "";
+    document.querySelector("#segundoEquipo").appendChild(crearTarjeta(equipo));
     equipoB = equipo;
     compararEquipos();
   } else {
-    return;
+    equipoA = equipo;
+    equipoB = null;
+    document.querySelector("#primerEquipo").innerHTML = "";
+    document.querySelector("#primerEquipo").appendChild(crearTarjeta(equipo));
+    document.querySelector("#segundoEquipo").innerHTML = "";
   }
-  console.log("Equipo A:", equipoA, "| Equipo B:", equipoB);
+  document.querySelector("#dropdownEquipos").innerHTML = "";
+  input.value = "";
 
 }
 async function compararEquipos() {
@@ -89,11 +93,9 @@ async function compararEquipos() {
         headers: { "Authorization": "Bearer " + token }
       })
     ]);
-
-    // Cada respuesta todavía necesita convertirse a JSON (¿en paralelo también?)
     const [datosA, datosB] = await Promise.all([
       respA.json(),
-      respB.json()   // ¿qué método?
+      respB.json()
     ]);
 
     mostrarComparacion(datosA.team, datosB.team);
@@ -106,7 +108,7 @@ function mostrarComparacion(equipoA, equipoB) {
   const columnaA = document.querySelector("#primerEquipo");
   const columnaB = document.querySelector("#segundoEquipo");
 
-  columnaA.innerHTML = "";  // limpiar antes de renderizar
+  columnaA.innerHTML = "";
   columnaB.innerHTML = "";
 
   columnaA.appendChild(crearTarjeta(equipoA));
@@ -117,17 +119,21 @@ function crearTarjeta(equipo) {
   const contenedor = document.createElement("div");
 
   const nombre = document.createElement("h4");
-  nombre.textContent = equipo.name_en;   // el nombre del equipo
+  nombre.textContent = equipo.name_en;
 
   const bandera = document.createElement("img");
-  bandera.src = equipo.flag;          // la URL de la bandera
+  bandera.src = equipo.flag;
+
+  const grupo = document.createElement("p");
+  grupo.textContent = "Grupo: " + equipo.groups;
 
   const codigo = document.createElement("p");
-  codigo.textContent = "Código FIFA: " + equipo.fifa_code;  // el código
+  codigo.textContent = "Código FIFA: " + equipo.fifa_code;
 
   contenedor.appendChild(nombre);
   contenedor.appendChild(bandera);
   contenedor.appendChild(codigo);
+  contenedor.appendChild(grupo);
 
   return contenedor;
 }
