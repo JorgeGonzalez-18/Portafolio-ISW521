@@ -1,1 +1,98 @@
-:root {}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #061840;
+}
+
+/* Input de búsqueda */
+#inputBusquedaEquipos {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+#inputBusquedaEquipos:focus {
+    border-color: #061840;
+}
+
+/* Dropdown de sugerencias */
+#dropdownEquipos {
+    list-style: none;
+    margin-top: 4px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#dropdownEquipos li {
+    padding: 0.6rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+#dropdownEquipos li:hover {
+    background: #061840;
+    color: #fff;
+}
+
+/* Sección de comparación */
+#comparadorSection h2 {
+    margin: 2rem 0 1rem;
+    color: #061840;
+}
+
+#columnas {
+    display: flex;
+    gap: 1.5rem;
+}
+
+#columnas article {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    min-height: 120px;
+}
+
+#columnas article img {
+    width: 100px;
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+}
+
+#columnas article h4 {
+    font-size: 1.3rem;
+    color: #061840;
+}
+
+
+#comparadorSection h2 {
+    text-align: center;
+}
+
+#vs {
+    align-self: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #E53935;
+}
