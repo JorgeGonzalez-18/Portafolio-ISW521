@@ -6,93 +6,136 @@
 
 body {
     font-family: system-ui, sans-serif;
-    background: #ffffff;
+    background: linear-gradient(160deg, #0A2A66 0%, #061840 100%);
     color: #1a1a1a;
+    min-height: 100vh;
     padding: 2rem;
+}
+
+/* Header con banda protagonista */
+header {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
+    text-align: center;
+    padding: 1.5rem;
+    border-bottom: 4px solid #E53935;
 }
 
 header h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #061840;
+    color: #fff;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* Input de búsqueda */
 #inputBusquedaEquipos {
     width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 10px;
     outline: none;
-}
-
-#inputBusquedaEquipos:focus {
-    border-color: #061840;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Dropdown de sugerencias */
 #dropdownEquipos {
     list-style: none;
-    margin-top: 4px;
-    border-radius: 8px;
+    margin-top: 6px;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #dropdownEquipos li {
-    padding: 0.6rem 1rem;
+    padding: 0.7rem 1.2rem;
     background: #fff;
     border-bottom: 1px solid #eee;
     cursor: pointer;
+    transition: background 0.15s;
 }
 
 #dropdownEquipos li:hover {
-    background: #061840;
+    background: #E53935;
     color: #fff;
 }
 
 /* Sección de comparación */
 #comparadorSection h2 {
-    margin: 2rem 0 1rem;
-    color: #061840;
+    margin: 2.5rem 0 1.5rem;
+    color: #fff;
+    text-align: center;
+    font-size: 1.6rem;
 }
 
 #columnas {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
+    align-items: stretch;
 }
 
 #columnas article {
     flex: 1;
     background: #fff;
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 1.8rem 1.5rem;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    min-height: 120px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado inicial: mensaje cuando el article está vacío */
+#columnas article:empty::before {
+    content: "Selecciona un equipo";
+    color: #aaa;
+    font-style: italic;
 }
 
 #columnas article img {
-    width: 100px;
+    width: 120px;
     margin: 1rem 0;
-    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 #columnas article h4 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #061840;
+    margin-bottom: 0.3rem;
 }
 
-
-#comparadorSection h2 {
-    text-align: center;
+#columnas article p {
+    color: #444;
+    margin: 0.2rem 0;
 }
 
+/* Badge del grupo */
+#columnas article p:last-child {
+    display: inline-block;
+    background: #061840;
+    color: #fff;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* VS entre columnas */
 #vs {
     align-self: center;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #E53935;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
