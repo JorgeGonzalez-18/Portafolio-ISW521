@@ -97,16 +97,18 @@ function buscarStatsEnGrupos(grupos, idEquipo) {
 }
 async function compararEquipos() {
   try {
-    const [respA, respB, respGroups] = await Promise.all([
+    const [respA, respB, respGroups, respGames] = await Promise.all([
       fetch("https://worldcup26.ir/get/team/" + equipoA._id, { headers: { "Authorization": "Bearer " + token } }),
       fetch("https://worldcup26.ir/get/team/" + equipoB._id, { headers: { "Authorization": "Bearer " + token } }),
-      fetch("https://worldcup26.ir/get/groups", { headers: { "Authorization": "Bearer " + token } })
+      fetch("https://worldcup26.ir/get/groups", { headers: { "Authorization": "Bearer " + token } }),
+      fetch("https://worldcup26.ir/get/games", { headers: { "Authorization": "Bearer " + token } })
     ]);
 
-    const [datosA, datosB, datosGroups] = await Promise.all([
+    const [datosA, datosB, datosGroups, datosGames] = await Promise.all([
       respA.json(),
       respB.json(),
-      respGroups.json()
+      respGroups.json(),
+      respGames.json()
     ]);
     const statsA = buscarStatsEnGrupos(datosGroups.groups, datosA.team.id);
     const statsB = buscarStatsEnGrupos(datosGroups.groups, datosB.team.id);
@@ -114,12 +116,18 @@ async function compararEquipos() {
     statsA.posicion = calcularPosicion(datosGroups.groups, datosA.team.id);
     statsB.posicion = calcularPosicion(datosGroups.groups, datosB.team.id);
 
-    mostrarComparacion(datosA.team, datosB.team, statsA, statsB);
+    // Estadísticas del torneo completo (grupos + eliminatorias)
+    const totalA = calcularEstadisticas(datosGames.games, datosA.team.id);
+    const totalB = calcularEstadisticas(datosGames.games, datosB.team.id);
+    statsA.total = totalA;
+    statsB.total = totalB;
+
+    mostrarComparacion(datosA.team, datosB.team, statsA, statsB, datosGames);
   } catch (error) {
     console.error("Error al comparar:", error);
   }
 }
-function mostrarComparacion(equipoA, equipoB, statsA, statsB) {
+function mostrarComparacion(equipoA, equipoB, statsA, statsB, games) {
   const columnaA = document.querySelector("#primerEquipo");
   const columnaB = document.querySelector("#segundoEquipo");
 
@@ -152,21 +160,23 @@ function crearTarjeta(equipo, stats) {
 
   // Solo si vienen estadísticas (en el preview no vienen)
   if (stats) {
-    const pts = document.createElement("p");
-    pts.textContent = "Puntos: " + stats.pts;
+    const posicion = document.createElement("p");
+    posicion.textContent = "Posición en grupo: " + stats.posicion + "°";
 
+    const pts = document.createElement("p");
+    pts.textContent = "Puntos (grupos): " + stats.pts;
+
+    // Del torneo completo (stats.total viene de /get/games)
     const pj = document.createElement("p");
-    pj.textContent = "Partidos jugados: " + stats.mp;
+    pj.textContent = "Partidos jugados: " + stats.total.jugados;
 
     const record = document.createElement("p");
-    record.textContent = "V-E-D: " + stats.w + "-" + stats.d + "-" + stats.l;
+    record.textContent = "V-E-D: " + stats.total.victorias + "-" + stats.total.empates + "-" + stats.total.derrotas;
 
     const goles = document.createElement("p");
-    goles.textContent = "Goles: " + stats.gf + " a favor, " + stats.ga + " en contra (dif " + stats.gd + ")";
-    const posición = document.createElement("p");
-    posición.textContent = "Posición en el grupo: " + stats.posicion;
+    goles.textContent = "Goles: " + stats.total.golesFavor + " a favor, " + stats.total.golesContra + " en contra";
 
-    contenedor.appendChild(posición);
+    contenedor.appendChild(posicion);
     contenedor.appendChild(pts);
     contenedor.appendChild(pj);
     contenedor.appendChild(record);
@@ -197,4 +207,43 @@ function calcularPosicion(grupos, idEquipo) {
     }
   }
   return null;
+}
+function calcularEstadisticas(games, idEquipo) {
+  let jugados = 0;
+  let golesFavor = 0;
+  let golesContra = 0;
+  let victorias = 0;
+  let empates = 0;
+  let derrotas = 0;
+
+  games.forEach(function (game) {
+    if (game.finished !== "TRUE") return;
+
+    const esLocal = game.home_team_id === idEquipo;
+    const esVisitante = game.away_team_id === idEquipo;
+    if (!esLocal && !esVisitante) return;
+
+    jugados++;
+
+    const golesLocal = Number(game.home_score);
+    const golesVisitante = Number(game.away_score);
+
+    let favor, contra;
+    if (esLocal) {
+      favor = golesLocal;
+      contra = golesVisitante;
+    } else {
+      favor = golesVisitante;
+      contra = golesLocal;
+    }
+
+    golesFavor += favor;
+    golesContra += contra;
+
+    if (favor > contra) victorias++;
+    else if (favor === contra) empates++;
+    else derrotas++;
+  });
+
+  return { jugados, golesFavor, golesContra, victorias, empates, derrotas };
 }
